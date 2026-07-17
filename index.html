@@ -87,7 +87,7 @@
   .section-label.consolation .tag{color:var(--slate);}
 
   /* ---------- Legend ---------- */
-  .legend-wrap{margin:0 32px 8px;display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;}
+  .legend-wrap{margin:24px 32px 8px;display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;}
   .legend{
     background:var(--white);
     border:1px solid var(--line);
@@ -130,11 +130,12 @@
   .tournament-scroll{overflow-x:auto; padding:10px 32px 30px;}
   .tournament-layout{
     position:relative;
-    display:flex; align-items:stretch; gap:90px;
+    display:flex; align-items:stretch; gap:var(--gap-lb);
     min-width:max-content;
   }
   #connector-svg{position:absolute; top:0; left:0; z-index:0; overflow:visible;}
   .brackets-stack{position:relative; z-index:1; display:flex; flex-direction:column; gap:64px;}
+  .brackets-stack > div:first-child .section-label{margin-top:8px;}
   .championship-col{position:relative; z-index:1; display:flex; flex-direction:column; justify-content:center; gap:18px; flex:none;}
 
   .bracket{display:flex;align-items:stretch;}
@@ -254,19 +255,6 @@
   </div>
 
   <div class="legend-wrap">
-    <div class="legend">
-      <h3>Team Key</h3>
-      <table>
-        <tr><td class="teamslot">Team 1</td><td class="letter">P</td></tr>
-        <tr><td class="teamslot">Team 2</td><td class="letter">L</td></tr>
-        <tr><td class="teamslot">Team 3</td><td class="letter">E</td></tr>
-        <tr><td class="teamslot">Team 4</td><td class="letter">X</td></tr>
-        <tr><td class="teamslot">Team 5</td><td class="letter">K</td></tr>
-        <tr><td class="teamslot">Team 6</td><td class="letter">I</td></tr>
-        <tr><td class="teamslot">Team 7</td><td class="letter">T</td></tr>
-        <tr><td class="teamslot">Team 8</td><td class="letter">S</td></tr>
-      </table>
-    </div>
     <div class="key">
       <div class="row"><span class="swatch" style="background:var(--crimson)"></span> Winners bracket game</div>
       <div class="row"><span class="swatch" style="background:var(--navy)"></span> Consolation bracket game</div>
@@ -282,7 +270,6 @@
 
         <!-- ================= WINNERS BRACKET ================= -->
         <div>
-          <div class="section-label"><span class="tag">Winners Bracket</span><span class="rule"></span></div>
           <div class="bracket wb">
 
             <div class="round" style="height:calc(var(--row-unit) * 4)">
@@ -343,7 +330,6 @@
 
         <!-- ================= CONSOLATION BRACKET ================= -->
         <div>
-          <div class="section-label consolation"><span class="tag">Consolation Bracket</span><span class="rule"></span></div>
           <div class="bracket lb">
 
             <div class="round" style="height:calc(var(--row-unit) * 2)">
@@ -393,7 +379,6 @@
                   <div class="team tbd"><span class="name">Winner G12</span><span class="score">&mdash;</span></div>
                   <div class="team tbd"><span class="name">Loser G11 &#9679;</span><span class="score">&mdash;</span></div>
                 </div>
-                <div class="feed-note">&#9679; drops in from the winners bracket (not a consolation-bracket match)</div>
               </div>
             </div>
 
@@ -431,8 +416,7 @@
     </div>
   </div>
 
-  <p class="footnote"><b>Note:</b> Round 2+ matchups above are shown as "Winner of Game N" placeholders — once Round 1 results are in, swap these for team names/letters the same way Round 1 is filled in today.</p>
-  <p class="footnote" id="updated-note" style="font-family:'JetBrains Mono',monospace;font-size:11px;"></p>
+  <p class="footnote" id="updated-note" style="font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:16px;"></p>
 
 </div>
 
