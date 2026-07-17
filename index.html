@@ -28,7 +28,12 @@
     font-family:'Inter',sans-serif;
     color:var(--navy);
   }
-  .page{max-width:1600px;margin:0 auto;padding:0 0 60px;}
+  .page{
+    max-width:1600px;margin:0 auto;padding:0 0 60px;
+    /* Shrinks (or grows) the whole page for embedding — change this one
+       number to make everything larger/smaller. 1 = full size. */
+    zoom: 0.8;
+  }
 
   /* ---------- Header ---------- */
   .masthead{
