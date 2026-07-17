@@ -197,6 +197,37 @@
     margin-top:6px; text-align:center; max-width:var(--match-w);
   }
 
+  /* ---------- Skills competition card ---------- */
+  .skills-card{
+    width:calc(var(--match-w) * 2 + 60px);
+    background:var(--white);
+    border:1px solid var(--line);
+    border-left:4px solid #22a83a;
+    border-radius:8px;
+    box-shadow:0 1px 3px rgba(20,44,74,.06);
+    overflow:hidden;
+  }
+  .skills-row{display:flex; align-items:center;}
+  .skills-row + .skills-row{border-top:1px dashed var(--line);}
+  .skills-event{
+    flex:1 1 auto; min-width:0;
+    padding:9px 12px;
+    font-size:13px; font-weight:600; color:var(--navy);
+  }
+  .skills-winner{
+    width:230px; flex:none;
+    padding:9px 12px;
+    font-size:13px; color:var(--slate); font-style:italic;
+    border-left:1px dashed var(--line);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .skills-header{background:var(--cream);}
+  .skills-header .skills-event, .skills-header .skills-winner{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--slate); font-style:normal; font-weight:700;
+  }
+
   /* ---------- Championship column ---------- */
   .champ-games{display:flex; gap:14px;}
   .champ-games .match{width:152px;}
@@ -376,6 +407,29 @@
               </div>
             </div>
 
+          </div>
+        </div>
+
+        <!-- ================= SKILLS COMPETITION ================= -->
+        <div>
+          <div class="section-label"><span class="tag">Skills Competition</span><span class="rule"></span></div>
+          <div class="skills-card">
+            <div class="skills-row skills-header">
+              <div class="skills-event">Event</div>
+              <div class="skills-winner">Winner</div>
+            </div>
+            <div class="skills-row">
+              <div class="skills-event">Home Run Derby</div>
+              <div class="skills-winner" id="skills-i3">&mdash;</div>
+            </div>
+            <div class="skills-row">
+              <div class="skills-event">Around the Bases Speed Challenge</div>
+              <div class="skills-winner" id="skills-i4">&mdash;</div>
+            </div>
+            <div class="skills-row">
+              <div class="skills-event">Around the Horn Team Challenge</div>
+              <div class="skills-winner" id="skills-i5">&mdash;</div>
+            </div>
           </div>
         </div>
 
@@ -589,6 +643,23 @@
     if (nameEl) nameEl.textContent = value;
   }
 
+  // Skills competition winners — column I, rows 3-5 (I3, I4, I5)
+  var SKILLS_CELLS = [
+    { row: 3, col: 9, elId: 'skills-i3' },
+    { row: 4, col: 9, elId: 'skills-i4' },
+    { row: 5, col: 9, elId: 'skills-i5' }
+  ];
+  function applySkillsCells(rows){
+    SKILLS_CELLS.forEach(function(cell){
+      var r = rows[cell.row - 1];
+      if (!r) return;
+      var value = (r[cell.col - 1] || '').trim();
+      if (!value) return;
+      var el = document.getElementById(cell.elId);
+      if (el) el.textContent = value;
+    });
+  }
+
   function setUpdatedNote(text){
     var el = document.getElementById('updated-note');
     if (el) el.textContent = text;
@@ -602,6 +673,7 @@
         var rows = parseCSV(text);
         applySheetData(rows);
         applyChampionCell(rows);
+        applySkillsCells(rows);
         draw();
         setUpdatedNote('Updated ' + new Date().toLocaleTimeString());
       })
