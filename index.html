@@ -18,7 +18,7 @@
     --line:#D8D2C4;
     --row-unit: 120px;
     --gap-lb: 48px;
-    --gap-wb: 157px; /* makes WB's 3 columns span the same total width as LB's 4 columns, so WB Final lines up over LB Final */
+    --gap-wb: 48px;
     --match-w: 170px;
   }
   *{box-sizing:border-box;}
@@ -270,6 +270,7 @@
 
         <!-- ================= WINNERS BRACKET ================= -->
         <div>
+          <div class="section-label"><span class="tag">Winners Bracket</span><span class="rule"></span></div>
           <div class="bracket wb">
 
             <div class="round" style="height:calc(var(--row-unit) * 4)">
@@ -317,7 +318,7 @@
             </div>
 
             <div class="round">
-              <div class="round-title">Winners Bracket Final &middot; 7/21</div>
+              <div class="round-title">Final &middot; 7/21</div>
               <div class="slot"><div class="match" data-game="11">
                 <div class="meta"><b>Game 11</b> · 4:00 PM · Field 4</div>
                 <div class="team tbd"><span class="name">Winner G5</span><span class="score">&mdash;</span></div>
@@ -330,6 +331,7 @@
 
         <!-- ================= CONSOLATION BRACKET ================= -->
         <div>
+          <div class="section-label consolation"><span class="tag">Consolation Bracket</span><span class="rule"></span></div>
           <div class="bracket lb">
 
             <div class="round" style="height:calc(var(--row-unit) * 2)">
@@ -372,7 +374,7 @@
             </div>
 
             <div class="round">
-              <div class="round-title">Consolation Bracket Final &middot; 7/21</div>
+              <div class="round-title">Final &middot; 7/21</div>
               <div class="slot">
                 <div class="match" data-game="13">
                   <div class="meta"><b>Game 13</b> · 6:30 PM · Field 4</div>
