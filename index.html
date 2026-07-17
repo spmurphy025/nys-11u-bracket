@@ -551,7 +551,7 @@
       }
     }
     if (field.length || row.length){ row.push(field); rows.push(row); }
-    return rows.filter(function(r){ return r.length > 1 || r[0] !== ''; });
+    return rows; // keep every row (including blanks) so row indices match real sheet row numbers
   }
 
   function applySheetData(rows){
@@ -594,6 +594,19 @@
     });
   }
 
+  // Reads a specific cell by row/column number (1-indexed, matching how you'd
+  // refer to it in Sheets — "D18" is row 18, column D). If you ever move the
+  // champion name to a different cell, just update ROW/COL below.
+  var CHAMPION_CELL = { row: 18, col: 4 }; // D18
+  function applyChampionCell(rows){
+    var r = rows[CHAMPION_CELL.row - 1];
+    if (!r) return;
+    var value = (r[CHAMPION_CELL.col - 1] || '').trim();
+    if (!value) return;
+    var nameEl = document.querySelector('.champion-banner .name');
+    if (nameEl) nameEl.textContent = value;
+  }
+
   function setUpdatedNote(text){
     var el = document.getElementById('updated-note');
     if (el) el.textContent = text;
@@ -604,7 +617,9 @@
     fetch(SHEET_CSV_URL + (SHEET_CSV_URL.indexOf('?') > -1 ? '&' : '?') + '_=' + Date.now())
       .then(function(res){ return res.text(); })
       .then(function(text){
-        applySheetData(parseCSV(text));
+        var rows = parseCSV(text);
+        applySheetData(rows);
+        applyChampionCell(rows);
         draw();
         setUpdatedNote('Updated ' + new Date().toLocaleTimeString());
       })
